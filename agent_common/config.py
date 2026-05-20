@@ -32,11 +32,8 @@ SMTP_PORT = int(os.getenv("SMTP_PORT", "465"))
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 HR_EMAIL = os.getenv("HR_EMAIL", "hr@company.com")
 
-# Service URLs (internal communication)
-# Base Host
+# Base Host & Ports (for local fallback)
 HOST = os.getenv("HOST", "127.0.0.1")
-
-# Ports
 ORCHESTRATOR_PORT = os.getenv("ORCHESTRATOR_PORT", "8000")
 EVALUATOR_PORT = os.getenv("EVALUATOR_PORT", "8001")
 TEST_SERVICE_PORT = os.getenv("TEST_SERVICE_PORT", "8002")
@@ -46,15 +43,15 @@ LIVEHR_SERVICE_PORT = os.getenv("LIVEHR_SERVICE_PORT", "8005")
 BGV_SERVICE_PORT = os.getenv("BGV_SERVICE_PORT", "8006")
 OFFER_SERVICE_PORT = os.getenv("OFFER_SERVICE_PORT", "8007")
 
-# Service URLs
-ORCHESTRATOR_URL = f"http://{HOST}:{ORCHESTRATOR_PORT}"
-EVALUATOR_URL = f"http://{HOST}:{EVALUATOR_PORT}"
-TEST_SERVICE_URL = f"http://{HOST}:{TEST_SERVICE_PORT}"
-COMM_SERVICE_URL = f"http://{HOST}:{COMM_SERVICE_PORT}"
-CODING_SERVICE_URL = f"http://{HOST}:{CODING_SERVICE_PORT}"
-LIVEHR_SERVICE_URL = f"http://{HOST}:{LIVEHR_SERVICE_PORT}"
-BGV_SERVICE_URL = f"http://{HOST}:{BGV_SERVICE_PORT}"
-OFFER_SERVICE_URL = f"http://{HOST}:{OFFER_SERVICE_PORT}"
+# Service URLs (uses full URL from env, falls back to localhost)
+ORCHESTRATOR_URL = os.getenv("ORCHESTRATOR_URL", f"http://{HOST}:{ORCHESTRATOR_PORT}")
+EVALUATOR_URL = os.getenv("EVALUATOR_URL", f"http://{HOST}:{EVALUATOR_PORT}")
+TEST_SERVICE_URL = os.getenv("TEST_SERVICE_URL", f"http://{HOST}:{TEST_SERVICE_PORT}")
+COMM_SERVICE_URL = os.getenv("COMM_SERVICE_URL", f"http://{HOST}:{COMM_SERVICE_PORT}")
+CODING_SERVICE_URL = os.getenv("CODING_SERVICE_URL", f"http://{HOST}:{CODING_SERVICE_PORT}")
+LIVEHR_SERVICE_URL = os.getenv("LIVEHR_SERVICE_URL", f"http://{HOST}:{LIVEHR_SERVICE_PORT}")
+BGV_SERVICE_URL = os.getenv("BGV_SERVICE_URL", f"http://{HOST}:{BGV_SERVICE_PORT}")
+OFFER_SERVICE_URL = os.getenv("OFFER_SERVICE_URL", f"http://{HOST}:{OFFER_SERVICE_PORT}")
 
 SERVICES = {
     "orchestrator": ORCHESTRATOR_URL,
@@ -67,10 +64,10 @@ SERVICES = {
     "offer_service": OFFER_SERVICE_URL,
 }
 
-# Scoring & Pipeline 
+# Scoring & Pipeline
 SHORTLIST_MIN_SCORE = int(os.getenv("SHORTLIST_MIN_SCORE", "40"))
 
-# LinkedIn OAuth (used in orchestrator)
+# LinkedIn OAuth
 LI_CLIENT_ID = os.getenv("LI_CLIENT_ID", "")
 LI_CLIENT_SECRET = os.getenv("LI_CLIENT_SECRET", "")
 LI_REDIRECT_URI = os.getenv("LI_REDIRECT_URI", "http://localhost:8000/linkedin/callback")
