@@ -1,3 +1,7 @@
+import sys
+print("Python:", sys.version, flush=True)
+print("Starting imports...", flush=True)
+
 from fastapi import FastAPI, HTTPException, Depends, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
