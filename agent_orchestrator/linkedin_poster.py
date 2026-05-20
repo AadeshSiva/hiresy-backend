@@ -1,6 +1,7 @@
 import sqlite3
 import requests
 import os
+from agent_common.config import FRONTEND_URL
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "linkedin_automation.db")
 
@@ -34,7 +35,7 @@ def format_post(job: dict, job_id: str = "") -> str:
         text += f"\n🛠 Skills: {skills}\n"
     text += "\n👉 Apply now or DM us!\n"
     if job_id:
-        text += f"🔗 Job details & application: http://localhost:5173/job/{job_id}\n\n"
+        text += f"🔗 Job details & application: {FRONTEND_URL}/job/{job_id}\n\n"
     else:
         text += "\n"
     text += "#Hiring #JobOpening #NowHiring #" + dept.replace(' ', '') + "\n"
