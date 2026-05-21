@@ -109,7 +109,7 @@ Soft Skills: {app_entry.soft_skills}
             "linkedin_url": app_entry.linkedin_url or "",
             "leetcode_url": app_entry.leetcode_url or "",
         }
-        res = requests.post(EVAL_SERVICE_URL, json=eval_payload, timeout=90)
+        res = requests.post(EVAL_SERVICE_URL, json=eval_payload, timeout=180)
         if res.ok:
             result = res.json()
             app_entry.eval_score = result.get("final_score")
