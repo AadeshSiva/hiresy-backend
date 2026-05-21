@@ -8,6 +8,7 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from typing import List
 import sqlite3, os, requests, urllib.parse, json as _json
+from agent_common.config import EVALUATOR_URL
 
 from agent_common.config import (
     ORCHESTRATOR_URL, TEST_SERVICE_URL, CODING_SERVICE_URL, LIVEHR_SERVICE_URL,
@@ -27,7 +28,7 @@ app = FastAPI(title="Hiresy Orchestrator")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://hiresyai.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://hiresy.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -79,7 +80,7 @@ def _safe_json(raw, fallback):
 # ─────────────────────────────────────────────────────────
 # Helper: trigger evaluation (background task)
 # ─────────────────────────────────────────────────────────
-EVAL_SERVICE_URL = "http://127.0.0.1:8001/eval/evaluate"
+EVAL_SERVICE_URL = f"{EVALUATOR_URL}/eval/evaluate"
 
 def trigger_evaluation(app_id: int, payload: dict):
     try:
